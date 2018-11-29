@@ -63,22 +63,21 @@ def addChecker(x, y):
     board[x, y].checker = checker
     checkers.append(checker)
 
+def addChecker2(x, y, isBlack):
+    checker = Checker()
+    checker.id = (x, y)
+    checker.index = x*8 + (y+1)
+    checker.black = isBlack
+    checker.x = x
+    checker.y = y
+    board[x, y].checker = checker
+    checkers.append(checker)
+
 
 # Initializes the board
 for x in range(0, 8):
-    if x % 2 == 1:
-        piece_offset = True
-    else:
-        piece_offset = False
     for y in range(0, 8):
-        piece = Piece(x * 62.5, y * 62.5)
-        board[x, y] = piece
-        if (x % 2 == 0 or y % 2 == 0) and (piece_offset == True):
-            addChecker(x, y)
-        elif (x % 2 == 1 or y % 2 == 1) and (piece_offset == False):
-            addChecker(x, y)
-            # print(board)
-
+        board[x, y] = Piece(x * 62.5, y * 62.5)
 
 def King(board):
     for piece in board.flat:
@@ -142,5 +141,5 @@ class TranspositionTable():
         pickle.dump(self.hashtable, save_file)
         save_file.close()
 
-ttable = TranspositionTable()
 
+ttable = TranspositionTable()
